@@ -1,11 +1,17 @@
 {
-  "name": "faye_scale_testing",
+  "name": "faye_server_mimic",
   "version": "1.0.0",
-  "description": "scale testing faye servers",
+  "description": "mimicing helpkit server",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Krishnan",
-  "license": "Mit"
+  "author": "krishnan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.9.7",
+    "morgan":"",
+    "ejs":"",
+    "underscore":""
+  }
 }
