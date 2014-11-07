@@ -16,7 +16,7 @@ if (system.args.length === 1) {
     console.log('The vlaue of tabls is '+tabs);
 }
 
-url = 'http://localhost:4000/';
+url = 'http://scale-testing-autorefresh-716963887.us-east-1.elb.amazonaws.com/';
 args.push(url);
 
 function handle_page(url,count){
