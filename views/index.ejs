@@ -26,12 +26,12 @@
 
 	    var data = {
 	      current_user_id : <%= current_user_id %>,
-	      faye_host : "http://freshdesk-scale-ac-1984965826.us-east-1.elb.amazonaws.com/realtime",
+	      faye_host : "http://agentcollision-2118332086.us-east-1.elb.amazonaws.com/realtime",
 	      client_opts : {
 	        retry: 10,
 	        timeout: 120
 	      },
-	      faye_server : "http://freshdesk-scale-ac-1984965826.us-east-1.elb.amazonaws.com/",
+	      faye_server : "http://agentcollision-2118332086.us-east-1.elb.amazonaws.com/",
 	      faye_auth_params :  <%- faye_auth_params %>,
 	      current_user : "<%= current_user %>", 
 	      agent_names : "<%= agent_names %>"
