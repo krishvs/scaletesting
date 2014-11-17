@@ -1,0 +1,129 @@
+<html>
+<head>
+  <script type="text/javascript" src="/jquery.js" ></script>
+  <script type="text/javascript" src="/socket.js" ></script>
+</head>
+<body>
+  <script type="text/javascript">
+    window.hashed_params = {
+      "previous_clients": []
+    }
+    window.autorefresh = function()
+    {
+      var node_socket = io.connect('http://chrome-864057763.us-east-1.elb.amazonaws.com/',{'force new connection':true});
+      window.node_socket = node_socket;
+      node_socket.on('connect', function(){
+        console.log('I have connected');
+      });
+      node_socket.on('chrome_extension',function(data){
+        if(data.action === 'connect'){
+          window.hashed_params['previous_clients'] =[];
+          window.previous_clientIds = [];
+          node_socket.emit('chrome_extension_connect',window.hashed_params);
+        }
+      });
+      node_socket.on('message', function(params){
+           console.log('have message here',params);
+      });
+
+      node_socket.on('disconnect', function(){
+        console.log('I am in disconnect');
+      });
+    }
+
+    window.agentcollision = function()
+    {
+      var node_socket = io.connect('http://chrome-864057763.us-east-1.elb.amazonaws.com/',{'force new connection':true});
+      window.node_socket = node_socket;
+      node_socket.on('connect', function(){
+        console.log('I have connected');
+      });
+      node_socket.on('chrome_extension',function(data){
+        if(data.action === 'connect'){
+          window.hashed_params['previous_clients'] =[];
+          window.previous_clientIds = [];
+          node_socket.emit('chrome_extension_connect',window.hashed_params);
+        }
+      });
+      node_socket.on('message', function(params){
+           console.log('have message here',params);
+      });
+
+      node_socket.on('view_event', function(params){
+           console.log('have view here',params);
+      });
+      node_socket.on('reply_event', function(params){
+           console.log('have reply here',params);
+      });
+      node_socket.on('reply_event_stop', function(params){
+           console.log('have reply stop here',params);
+      });
+
+      node_socket.on('disconnect', function(){
+        console.log('I am in disconnect');
+      });
+      window.AgentCollisionShow.init();
+    }
+    var AgentCollisionShow = (function () {
+            var setEvents = function () {   
+                console.log('setting events');      
+
+                $('.cancel_btn').on("click.agent_collsion",function () {
+                    console.log('clicking the stop button');
+                    window.node_socket.emit('agent_collision_reply_stop',window.agentcollision_reply_params);
+                });
+
+                $('.link').click(function () {
+                    window.node_socket.emit('agent_collision_reply_stop',window.agentcollision_reply_params);
+                });
+
+                function update_reload() {
+                    $('.source-badge-wrap .source').addClass('collision_refresh').attr('title', 'Click here to refresh the ticket');
+                }
+
+            };
+            var init = function () {
+                setEvents();       
+            };
+            var reply_event = function(){
+                window.node_socket.emit('agent_collision_reply',window.agentcollision_reply_params);  
+            }
+            return {
+                init: init,
+                reply_event: reply_event
+            }
+    })();
+    window.AgentCollisionShow = AgentCollisionShow;
+  </script>
+  <h1>Socket.io stress testing client</h1>
+  <div class="ticket-notifications" id="agent_collision_show">
+    <div class="view-flip" rel="notice-popover"  id="agents_viewing" data-object="viewing" data-placement="right" title="Currently viewing">
+      <a href="#">
+        <div class="flip-front"></div>
+        <div class="flip-back">0</div>
+      </a>
+    </div>
+
+    <div class="reply-flip" rel="notice-popover" id="agents_replying" data-object="replying" data-placement="right" title="Currently replying">
+      <a href="#">
+        <div class="flip-front"></div>
+        <div class="flip-back">0</div>
+      </a>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var data = {"data":"BtRSYyiiauZLwJV1UpglLyuemUoy7tkRAD9k3v93UrA=\n"};
+    var hashed_params = data;
+    jQuery(document).ready(function() {
+        hashed_params["agent_collision_view"] = "/lvh.me/collision/133/view"
+        hashed_params["user_name"] = "Support";
+        console.log('I have agent_collision feature');
+        window.agentcollision_reply_params = {
+          "reply_channel" : "/lvh.me/collision/133/reply",
+          "user_name" : "Support"
+        };
+        window.agentcollision();
+    });
+  </script>
+</body>
+</html>
