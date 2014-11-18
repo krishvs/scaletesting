@@ -10,7 +10,7 @@
     }
     window.autorefresh = function()
     {
-      var node_socket = io.connect('http://ec2-54-166-178-169.compute-1.amazonaws.com/',{'force new connection':true});
+      var node_socket = io.connect('http://chrome-864057763.us-east-1.elb.amazonaws.com/',{'force new connection':true});
       window.node_socket = node_socket;
       node_socket.on('connect', function(){
         console.log('I have connected');
@@ -33,7 +33,7 @@
 
     window.agentcollision = function()
     {
-      var node_socket = io.connect('http://ec2-54-166-178-169.compute-1.amazonaws.com/',{'force new connection':true});
+      var node_socket = io.connect('http://chrome-864057763.us-east-1.elb.amazonaws.com/',{'force new connection':true});
       window.node_socket = node_socket;
       node_socket.on('connect', function(){
         console.log('I have connected');
